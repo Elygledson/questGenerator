@@ -1,0 +1,39 @@
+<div class="flex flex-col items-center justify-center gap-5">
+  <div class="rounded-lg w-full p-8 bg-white shadow-lg">
+    <ng-container *ngFor="let question of questions; let i = index">
+      <div class="mb-6 p-6 border rounded-lg border-gray-300">
+        <div class="p-3">
+          <span class="text-lg text-gray-500">Questão {{ i + 1 }}</span>
+        </div>
+        <p class="text-lg text-gray-500 mb-3">{{ question.context }}</p>
+        <p class="text-lg text-gray-500 mb-3">{{ question.question }}</p>
+        <div class="grid gap-2">
+          <div
+            *ngFor="let option of question.options; let i = index"
+            class="flex flex-row items-center gap-5"
+          >
+            <span
+              [ngClass]="{ 'correct-answer': question.answer === option }"
+              class="text-gray-500 font-medium text-center p-2 bg-gray-200 w-8 rounded"
+              >{{ letters[i] }}</span
+            >
+            {{ option }}
+          </div>
+        </div>
+        <div *ngIf="question.justifications.length > 0" class="grid gap-2 pt-5">
+          <span class="text-lg text-gray-500 mb-3">Justificativas</span>
+          <div
+            *ngFor="let justification of question.justifications; let i = index"
+            class="flex flex-row items-center gap-5"
+          >
+            <span
+              class="text-gray-500 font-medium text-center p-2 bg-gray-200 w-8 rounded"
+              >{{ letters[i] }}</span
+            >
+            {{ justification }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
