@@ -1,0 +1,203 @@
+<div
+  style="height: 300vh"
+  class="min-h-screen flex flex-col items-center justify-center"
+>
+  <div class="container-header bg-amber-500">
+    <div
+      class="font-mono text-center w-auto h-96 font-bold text-white text-7xl"
+    >
+      <div class="typewriter">QuestGenerator</div>
+    </div>
+  </div>
+  <div class="container gap-28">
+    <div *ngIf="!loading">
+      <form [formGroup]="form">
+        <div class="generator">
+          <div class="w-full flex flex-col justify-center">
+            <span class="p-11 text-center text-lg text-gray-500"
+              >Item de avaliação a ser gerado</span
+            >
+            <span
+              class="p-2 text-center text-md text-gray-500"
+              matTooltip="Este é o texto da tooltip"
+              matTooltipPosition="above"
+              >Contexto
+              <mat-icon>info</mat-icon>
+            </span>
+            <div class="w-full h-full p-8">
+              <textarea
+                formControlName="context"
+                class="border border-gray focus:outline-none resize-none rounded-xl p-5 w-full h-full"
+                placeholder="Digite aqui..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex flex-col w-1/2 p-7 border-l border-gray">
+            <mat-button-toggle-group
+              name="questionType"
+              aria-label="Tipo de questão"
+              class="question-type"
+              formControlName="type"
+            >
+              <mat-button-toggle value="multiple_choice_4"
+                >Múltipla Escolha(4 Alternativas)</mat-button-toggle
+              >
+              <mat-button-toggle value="multiple_choice_5"
+                >Múltipla Escolha(5 Alternativas)</mat-button-toggle
+              >
+              <mat-button-toggle value="boolean"
+                >Verdadeira ou Falso</mat-button-toggle
+              >
+            </mat-button-toggle-group>
+            <label
+              for="level-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="Nível da dificuldade"
+              matTooltipPosition="above"
+            >
+              Dificuldade
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="level-selector"
+              formControlName="level"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option [value]="level.easy">Fácil</option>
+              <option [value]="level.veryEasy">Muito fácil</option>
+              <option [value]="level.medium">Médio</option>
+              <option [value]="level.hard">Difícil</option>
+              <option [value]="level.veryHard">Muito difícil</option>
+            </select>
+
+            <label
+              for="capacity-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="A capacidade a ser testada"
+              matTooltipPosition="above"
+              >Capacidade
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="capacity-selector"
+              formControlName="capacity"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option *ngFor="let option of capacities" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+            <label
+              for="function-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="Este é o texto da tooltip"
+              matTooltipPosition="above"
+              >Função
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="function-selector"
+              formControlName="function"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option *ngFor="let function of functions" [value]="function">
+                {{ function }}
+              </option>
+            </select>
+            <label
+              for="subfunction-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="Este é o texto da tooltip"
+              matTooltipPosition="above"
+              >Subfunção
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="subfunction-selector"
+              formControlName="subfunction"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option
+                *ngFor="let subfunction of subfunctions"
+                [value]="subfunction"
+              >
+                {{ subfunction }}
+              </option>
+            </select>
+            <label
+              for="knowledge-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="Este é o texto da tooltip"
+              matTooltipPosition="above"
+              >Conhecimento
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="knowledge-selector"
+              formControlName="knowledge"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option *ngFor="let option of knowledges" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+            <!-- <label
+              for="standard-selector"
+              class="block text-md text-gray-500 mb-2"
+              matTooltip="Este é o texto da tooltip"
+              matTooltipPosition="above"
+              >Padrão de desempenho
+              <mat-icon>info</mat-icon>
+            </label>
+            <select
+              id="standard-selector"
+              formControlName="Standard"
+              class="bg-gray-100 w-full p-2 border mb-2 rounded focus:outline-none focus:border-gray-100"
+            >
+              <option *ngFor="let option of standards" [value]="option">
+                {{ option }}
+              </option>
+            </select> -->
+            <button
+              type="submit"
+              class="bg-amber-500 w-full hover:bg-amber-600 text-white text-xl py-2 px-4 rounded cursor-pointer"
+              (click)="generate()"
+              [disabled]="!form.valid"
+            >
+              Gerar rascunho
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="loading">
+      <div class="generator flex flex-col justify-center items-center">
+        <ng-lottie
+          [options]="options"
+          [styles]="{ width: '350px', height: '350px' }"
+          (animationCreated)="onAnimate($event)"
+        >
+        </ng-lottie>
+        <h1>...Aguarde</h1>
+      </div>
+    </div>
+    <div id="card-question" class="bg-gray-300">
+      <div
+        class="bg-amber-500 text-center text-white p-2 text-xl h-12 w-60 m-5 rounded-xl"
+      >
+        Perguntas geradas
+      </div>
+      <div
+        *ngIf="questions; else noQuestions"
+        class="w-full pt-0 pl-20 pr-20 pb-20 overflow-auto"
+      >
+        <app-question-viewer [questions]="questions"></app-question-viewer>
+      </div>
+      <ng-template #noQuestions>
+        <span class="text-lg text-gray-500">
+          Nada para ver aqui! Tente gerar algumas questões
+        </span>
+      </ng-template>
+    </div>
+  </div>
+</div>
