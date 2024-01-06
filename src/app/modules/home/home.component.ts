@@ -22,26 +22,29 @@ export class HomeComponent {
   };
 
   capacities: string[] = [
-    'Utilizar aplicações e sistemas operacional no desenvolvimento da documentação de sistemas web.',
-    'Compreender fundamentos de UI e UX para o desenvolvimento de interfaces amigáveis ao usuário.',
-    'Aplicar lógica de programação na resolução de problemas computacionais.',
-    'Diferenciar metodologias de desenvolvimento de projetos de acordo com a característica da aplicação web.',
-    'Utilizar marcações, estilização e programação client-side para o desenvolvimento de interfaces para a web.',
-    'Desenvolver o back-end de aplicações web por meio de linguagem de programação.',
-    'Considerando a linguagem de programação na codificação de sistemas para internet',
+    'C2 - Compreender fundamentos de UI e UX para o desenvolvimento de interfaces amigáveis ao usuário',
+    'C3 - Aplicar lógica de programação na resolução de problemas computacionais',
+    'C4 - Diferenciar metodologias de desenvolvimento de projetos de acordo com a característica da aplicação web.',
+    'C5 - Utilizar marcação, estilização e programação client-side para o desenvolvimento de interfaces para a web e comunicação com APIs.',
+    'C6 - Desenvolver o back-end de aplicações web por meio de linguagem de programação.',
   ];
 
   knowledges: string[] = [
-    'Fundamentos de hardware e software',
-    'Software de escritório',
-    'Metodologias de versionamento',
-    'Princípios de UI e UX na produção de interfaces',
-    'Princípios de design',
-    'Abstração lógica e algebra booleana',
-    'Pseudocódigo',
-    'Algoritmos de busca e ordenação',
+    'Princípios de UI e UX na produção de interfaces e princípios de design',
+    'Abstração lógica e álgebra booleana e pseudocódigo',
+    'Linguagem de marcação, folha de estilo e linguagem de script',
+    'Planejamento e documentação de testes e 22 - Tipos, níveis e técnicas de teste',
+    'Modelo conceitual, lógico e físico de banco de dados, linguagens DDL e DML e padronização e normalização de dados',
+    'Estruturas de dados (vetores, matrizes, pilhas, filas, listas) e algoritmos de busca e ordenação',
     'Metodologias de desenvolvimento tradicionais e ágeis',
+    'Metodologias de versionamento e linguagem de programação server-side',
+    'Planejamento e documentação de testes e tipos, níveis e técnicas de teste',
+    'Fundamentos de hardware e software',
+    'Parametrização de sistemas web',
+    'Softwares de escritório',
+    'Princípios de UI e UX na produção de interfaces e princípios de design',
     'Interação com APIs',
+    'Desenvolvimento de APIs',
   ];
 
   standards: string[] = [
@@ -50,15 +53,20 @@ export class HomeComponent {
   ];
 
   functions: string[] = [
-    'Produzir Interfaces para internet, de acordo com metodologia e padrões de qualidade, usabilidade, interatividade, robustez, acessibilidade e segurança da informação.',
+    '1 - Produzir Interfaces para internet, de acordo com metodologia e padrões de qualidade, usabilidade, interatividade, robustez, acessibilidade e segurança da informação.',
+    '2 - Desenvolver sistemas para internet, de acordo com metodologia e padrões de qualidade, usabilidade, interatividade, robustez, acessibilidade e segurança da informação.',
   ];
 
   subfunctions: string[] = [
-    'Projetar interfaces para atender o escopo do projeto',
-    'Codificar interfaces para arquitetura client-side',
-    'Testar interfaces para garantia da qualidade da emtrega',
-    'Realizar interação com banco de dados',
-    'Codificar sistemas para arquitetura server-side',
+    '1.1 - Projetar interfaces para atender o escopo do projeto',
+    '1.2 - Codificar interfaces para arquitetura client-side',
+    '1.3 - Testar interfaces para garantia da qualidade da entrega',
+    '2.1 – Realizar interação com banco de dados',
+    '2.2 – Codificar sistemas para arquitetura server-side',
+    '2.3 – Testar sistemas para garantia da qualidade da entrega',
+    '2.4 – Implantar sistemas para internet',
+    '2.5 – Manter sistemas para internet',
+    '2.6 – Integrar interfaces com a arquitetura server-side.',
   ];
 
   questions: Question[] = [
@@ -148,6 +156,25 @@ export class HomeComponent {
           });
         this.loading = false;
       });
+  }
+
+  selectFunction(event: any): void {
+    if (this.form.get('function')?.value.startsWith('1')) {
+      this.subfunctions = [
+        '1.1 - Projetar interfaces para atender o escopo do projeto',
+        '1.2 - Codificar interfaces para arquitetura client-side',
+        '1.3 - Testar interfaces para garantia da qualidade da entrega',
+      ];
+    } else {
+      this.subfunctions = [
+        '2.1 – Realizar interação com banco de dados',
+        '2.2 – Codificar sistemas para arquitetura server-side',
+        '2.3 – Testar sistemas para garantia da qualidade da entrega',
+        '2.4 – Implantar sistemas para internet',
+        '2.5 – Manter sistemas para internet',
+        '2.6 – Integrar interfaces com a arquitetura server-side.',
+      ];
+    }
   }
 
   generate(): void {
